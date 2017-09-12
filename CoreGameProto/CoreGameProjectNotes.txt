@@ -1,0 +1,17 @@
+Camera States
+- Text mode
+- Play mode
+
+Game States
+- Text State
+- Play State
+- Paused
+
+First Level.
++ instead of collecting to open the gate...
+- need Three green(Special) targets which are dragon ball dispersed.
+- other ones are red. a certain number unveils a green target.
+
+Damageable objects
+- health
+- fade out time
