@@ -8,7 +8,7 @@ Game States
 - Paused
 
 First Level.
-+ instead of collecting to open the gate...
++ Collect five keys to open gate and reveal goal. // each key unveils part of the story. 
 - need Three green(Special) targets which are dragon ball dispersed.
 - other ones are red. a certain number unveils a green target.
 
