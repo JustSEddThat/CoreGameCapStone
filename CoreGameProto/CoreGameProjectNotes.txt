@@ -15,3 +15,15 @@ First Level.
 Damageable objects
 - health
 - fade out time
+
+To transition sections, block progress in a certain direction, then use triggers 
+
+
+			Code Breakdownsssss
+	Target && OR Target || enemy controllers.
+	UI controller
+	Game controller
+	player
+	enemy inheritance w/ damageable?
+	PlayState
+	EnemyState

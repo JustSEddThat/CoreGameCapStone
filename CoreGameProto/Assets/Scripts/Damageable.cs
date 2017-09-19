@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour 
 {
-    public float health;
+    protected float health;
+    protected float secondsTilDeath;
+   
+
 	// Use this for initialization
 	void Start () 
     {
@@ -18,7 +21,7 @@ public class Damageable : MonoBehaviour
             StartCoroutine(waitTilDeath());
 	}
 
-    void OnTriggerEnter2D(Collider2D other)
+    public virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Arrow"))
         {
@@ -26,7 +29,13 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    IEnumerator waitTilDeath()
+    public virtual IEnumerator waitTilDeath(float lag)
+    {
+        yield return new WaitForSeconds(lag);
+        Destroy(gameObject);
+    }
+
+    public virtual IEnumerator waitTilDeath()
     {
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
