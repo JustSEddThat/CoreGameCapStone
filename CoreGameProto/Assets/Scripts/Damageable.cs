@@ -17,7 +17,7 @@ public class Damageable : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (health == 0)
+       // if (health == 0)
             StartCoroutine(waitTilDeath());
 	}
 
@@ -26,12 +26,22 @@ public class Damageable : MonoBehaviour
         if (other.CompareTag("Arrow"))
         {
             health -= 1f;
+            StartCoroutine(waitTilDeath(secondsTilDeath, other.gameObject));
+
         }
     }
 
     public virtual IEnumerator waitTilDeath(float lag)
     {
         yield return new WaitForSeconds(lag);
+
+        Destroy(gameObject);
+    }
+
+    public virtual IEnumerator waitTilDeath(float lag, GameObject other)
+    {
+        yield return new WaitForSeconds(lag);
+        Destroy(other);
         Destroy(gameObject);
     }
 

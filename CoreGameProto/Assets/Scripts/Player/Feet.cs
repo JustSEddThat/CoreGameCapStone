@@ -14,7 +14,7 @@ public class Feet : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (!cd.IsTouchingLayers(1<<8))
+        if (!cd.IsTouchingLayers()) //1<<8
             transform.parent.SendMessage("canJump", false);
 	}
 

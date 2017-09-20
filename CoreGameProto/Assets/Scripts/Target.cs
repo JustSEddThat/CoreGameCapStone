@@ -32,5 +32,7 @@ public class Target : Damageable
     public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
+        if(other.CompareTag("Arrow"))
+            GetComponentInChildren<ParticleSystem>().Play();
     } 
 }
