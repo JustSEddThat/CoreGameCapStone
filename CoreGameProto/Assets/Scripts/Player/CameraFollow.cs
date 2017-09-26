@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour {
 
 	
     private GameObject player;
+
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -26,4 +27,6 @@ public class CameraFollow : MonoBehaviour {
             yield return null;
         }
     }
+
+ 
 }

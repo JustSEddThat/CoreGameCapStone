@@ -27,6 +27,9 @@ public class TargetController : MonoBehaviour
 
         foreach (GameObject gt in greenTargets)
             gt.SetActive(false);
+
+        foreach (Transform i in transform)
+            ;
 	}
 	
 

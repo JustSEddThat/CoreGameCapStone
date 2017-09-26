@@ -36,6 +36,10 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
         if (Input.GetKeyDown(KeyCode.Space) && jumpable)
             Jump();
+        if (Input.GetKeyDown(KeyCode.Space) && !jumpable)
+            if (GetComponent<Collider2D>().IsTouchingLayers(1 << 8))
+                canJump(true);
+
 
         if (facingRight && Input.GetAxis("Horizontal") < 0)
         {
@@ -74,7 +78,10 @@ public class PlayerScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bounceable"))
+        {
             jumpPower = 500;
+
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)

@@ -30,6 +30,7 @@ C:\Users\Edd\Documents\BC\CoreGame\CoreGameProto\Temp\bin\Debug\Unity.Legacy.NRe
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameProto\Temp\bin\Debug\UnityEngine.TestRunner.xml
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameProto\Temp\bin\Debug\nunit.framework.xml
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameProto\Temp\bin\Debug\UnityEngine.Timeline.xml
+C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\Assembly-CSharp.dll
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\Assembly-CSharp.pdb
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\nunit.framework.dll
@@ -59,6 +60,5 @@ C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\Temp\bin\Debug
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\UnityEngine.Timeline.xml
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\UnityEngine.Analytics.xml
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\UnityEngine.HoloLens.xml
-C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.dll
 C:\Users\Edd\Documents\BC\CoreGame\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.pdb

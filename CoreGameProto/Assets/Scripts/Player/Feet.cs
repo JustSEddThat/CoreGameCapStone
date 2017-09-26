@@ -20,7 +20,7 @@ public class Feet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Jumpable") || other.CompareTag("Bounceable"))
+        if(other.CompareTag("Jumpable"))//|| other.CompareTag("Bounceable"))
             transform.parent.SendMessage("canJump", true);
     }
 
