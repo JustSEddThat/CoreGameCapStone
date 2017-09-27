@@ -17,6 +17,7 @@ public class PlayerScript : MonoBehaviour
 	
 	void Start () 
     {
+        facingRight = false;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 	}
@@ -35,7 +36,12 @@ public class PlayerScript : MonoBehaviour
 
     void PlayerStateUpdate()
     {
-        if (rb.velocity.x > 0)
+        if (jumpable)
+            anim.SetBool("Grounded", true);
+        else
+            anim.SetBool("Grounded", false);
+        
+        if (rb.velocity.x != 0)
             anim.SetBool("Speed", true);
         else
             anim.SetBool("Speed", false);
