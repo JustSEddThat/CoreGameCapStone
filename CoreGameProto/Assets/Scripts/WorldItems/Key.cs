@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour {
+public class Key : MonoBehaviour 
+{
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
 		
 	}
 	

@@ -64,6 +64,9 @@ public class Arrow : MonoBehaviour {
            
         }
 
+        if (marked.gameObject.CompareTag("Enemy"))
+            Destroy(gameObject);
+
     
     }
 }

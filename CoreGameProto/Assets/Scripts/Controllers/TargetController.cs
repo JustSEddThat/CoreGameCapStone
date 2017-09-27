@@ -6,6 +6,7 @@ public enum EnemyLevel {targets, enemies1};
 public class TargetController : MonoBehaviour 
 {
     public static TargetController tc;
+    public GameObject key1;
     GameObject[] redTargets;
     [SerializeField]
     float numRTargets;
@@ -28,6 +29,7 @@ public class TargetController : MonoBehaviour
         foreach (GameObject gt in greenTargets)
             gt.SetActive(false);
 
+        key1.SetActive(false);
         foreach (Transform i in transform)
             ;
 	}
@@ -44,5 +46,10 @@ public class TargetController : MonoBehaviour
         if (numRTargets < 1)
             foreach (GameObject gt in greenTargets)
                 gt.gameObject.SetActive(true);
+    }
+
+    public void destroyedGTarget()
+    {
+        key1.SetActive(true);
     }
 }

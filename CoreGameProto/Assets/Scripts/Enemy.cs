@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Enemy : Damageable 
 {
-   
 
-	void Start () 
+    Rigidbody2D rb;
+    bool facingRight;
+    public GameObject barrier;
+
+	void Start ()
     {
+
+        rb = GetComponent<Rigidbody2D>();
+        facingRight = true;
         health = 3;
         secondsTilDeath = 2.5f;
 	}
@@ -15,15 +21,35 @@ public class Enemy : Damageable
 	
 	void Update () 
     {
-        if (health == 0)
+        if (GameController.gc.state == GameStates.PlayState)
+            Movement();
+        if (health <= 0)
+        {
             StartCoroutine(waitTilDeath());
+            Destroy(barrier);
+        }
 	}
 
+    void Movement()
+    {
+        if (facingRight)
+            rb.velocity = new Vector2(5f, 0);
+        else
+            rb.velocity = new Vector2(-5f, 0);
+    }
 
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("Bounceable") || coll.gameObject.CompareTag("Wall"))
+            facingRight = !facingRight;
+    }
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
+        //if (other.CompareTag("Arrow"))
+          //  health--;
     }
 
 }

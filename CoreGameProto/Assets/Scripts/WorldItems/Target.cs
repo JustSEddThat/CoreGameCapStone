@@ -24,8 +24,11 @@ public class Target : Damageable
     public override IEnumerator waitTilDeath(float lag)
     {
         yield return new WaitForSeconds(lag);
-        if(red)
+        if (red)
             TargetController.tc.destroyedRTarget();
+        else
+            TargetController.tc.destroyedGTarget();
+        
         Destroy(gameObject);
         
     }

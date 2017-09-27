@@ -12,11 +12,13 @@ public class PlayerScript : MonoBehaviour
 
     public bool facingRight = true;
     private Rigidbody2D rb;
+    private Animator anim;
     private bool jumpable = false;
 	
 	void Start () 
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +35,11 @@ public class PlayerScript : MonoBehaviour
 
     void PlayerStateUpdate()
     {
+        if (rb.velocity.x > 0)
+            anim.SetBool("Speed", true);
+        else
+            anim.SetBool("Speed", false);
+
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
         if (Input.GetKeyDown(KeyCode.Space) && jumpable)
             Jump();
