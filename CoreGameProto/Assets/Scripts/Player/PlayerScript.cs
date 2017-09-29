@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
 	
 	void Start () 
     {
-        facingRight = false;
+        
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 	}
