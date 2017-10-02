@@ -17,7 +17,11 @@ public class PlayerScript : MonoBehaviour
 	
 	void Start () 
     {
+<<<<<<< Updated upstream
         
+=======
+        facingRight = true;
+>>>>>>> Stashed changes
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 	}

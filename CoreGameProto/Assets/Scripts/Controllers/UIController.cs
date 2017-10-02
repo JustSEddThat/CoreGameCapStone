@@ -21,6 +21,8 @@ public class UIController : MonoBehaviour
         message = textPanel.GetComponentInChildren<Text>();
         textPanel.SetActive(false);
 
+		showZeroMessage();
+
 	}
 	
 	
@@ -85,6 +87,17 @@ public class UIController : MonoBehaviour
         }
 
     }
+
+	public void showZeroMessage()
+	{
+		string[] Dialogue = new string[]
+			{"Damn you father. I'm going to put an end to your regime, and stop you once and for all.", "Let’s start with dismantling your weapons.", "Ugh, I hate to say it, but I guess I am going to have to find that key first."};
+		GameController.gc.state = GameStates.TextState;
+		textPanel.SetActive(true);
+		StartCoroutine(waitForClick(Dialogue));
+
+
+	}
 
     public void showFirstMessage()
     {
