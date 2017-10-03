@@ -7,7 +7,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float jumpPower = 300f;
     [SerializeField]
-    private float speed = 6.5f;
+    private float speed = 9f;
 
 
     public bool facingRight = true;
@@ -17,11 +17,11 @@ public class PlayerScript : MonoBehaviour
 	
 	void Start () 
     {
-<<<<<<< Updated upstream
+//Updated upstream
         
-=======
+
         facingRight = true;
->>>>>>> Stashed changes
+// Stashed changes
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 	}
@@ -40,11 +40,8 @@ public class PlayerScript : MonoBehaviour
 
     void PlayerStateUpdate()
     {
-        if (jumpable)
-            anim.SetBool("Grounded", true);
-        else
-            anim.SetBool("Grounded", false);
-        
+     
+        Time.timeScale = 1;
         if (isMoving())
             anim.SetBool("Speed", true);
         else
@@ -81,8 +78,13 @@ public class PlayerScript : MonoBehaviour
         return false;
     }
 
+    void isGrounded(bool isTrue)
+    {
+       anim.SetBool("Grounded", true);
+    }
     void TextStateUpdate()
     {
+        Time.timeScale = 0;
     }
 
     void PauseUpdate()

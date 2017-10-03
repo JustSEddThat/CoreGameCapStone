@@ -67,7 +67,7 @@ public class UIController : MonoBehaviour
 
     IEnumerator waitForClick(string[] textList, int index)
     {
-        Debug.Log("yerr");
+        
         yield return new WaitForEndOfFrame();
         while (!Input.GetKeyDown(KeyCode.P))
             yield return null;
@@ -122,7 +122,7 @@ public class UIController : MonoBehaviour
 
     IEnumerator AlertWaitGone(float waitTime)
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSecondsRealtime(waitTime);
         alert.text = "";
 
     }

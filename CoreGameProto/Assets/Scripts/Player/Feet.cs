@@ -14,13 +14,19 @@ public class Feet : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (!cd.IsTouchingLayers()) //1<<8
+        if (!cd.IsTouchingLayers(LayerMask.GetMask(new string[]{"Floors", "Springs"})))
             transform.parent.SendMessage("canJump", false);
+        
+        if (cd.IsTouchingLayers(1 << 8))
+            transform.parent.SendMessage("isGrounded", true);
+        else
+            transform.parent.SendMessage("isGrounded", false);
+            
 	}
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Jumpable"))//|| other.CompareTag("Bounceable"))
+        if(other.CompareTag("Jumpable") || other.CompareTag("Bounceable"))
             transform.parent.SendMessage("canJump", true);
     }
 

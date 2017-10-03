@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator waitSecs()
     {
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSecondsRealtime(1.7f);
         Destroy(a1Gate);
     }
 
