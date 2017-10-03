@@ -45,7 +45,7 @@ public class PlayerScript : MonoBehaviour
         else
             anim.SetBool("Grounded", false);
         
-        if (rb.velocity.x != 0)
+        if (isMoving())
             anim.SetBool("Speed", true);
         else
             anim.SetBool("Speed", false);
@@ -69,6 +69,16 @@ public class PlayerScript : MonoBehaviour
             transform.Rotate(new Vector3(0, 180, 0));
         }
             
+    }
+
+    bool isMoving()
+    {
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            
+            return true;
+        }
+        return false;
     }
 
     void TextStateUpdate()
