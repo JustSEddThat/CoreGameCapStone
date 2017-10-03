@@ -8,6 +8,7 @@ public class Enemy : Damageable
     Rigidbody2D rb;
     bool facingRight;
     public GameObject barrier;
+    public bool isMover;
 
 	void Start ()
     {
@@ -21,8 +22,9 @@ public class Enemy : Damageable
 	
 	void Update () 
     {
-        if (GameController.gc.state == GameStates.PlayState)
+        if (GameController.gc.state == GameStates.PlayState && isMover)
             Movement();
+        
         if (health <= 0)
         {
             StartCoroutine(waitTilDeath());
@@ -47,9 +49,9 @@ public class Enemy : Damageable
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
-        base.OnTriggerEnter2D(other);
-        //if (other.CompareTag("Arrow"))
-          //  health--;
+       
+        if (other.CompareTag("Arrow"))
+          health--;
     }
 
 }

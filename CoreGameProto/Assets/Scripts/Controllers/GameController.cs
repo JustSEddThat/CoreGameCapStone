@@ -33,7 +33,12 @@ public class GameController : MonoBehaviour
             case 1:
                 a1Trig.SetActive(true);
                 firstEnemy.SetActive(true);
-                break;//
+                break;
+
+            case 2:
+                
+                break;
+
         }
     }
 

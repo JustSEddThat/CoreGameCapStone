@@ -17,8 +17,7 @@ public class Damageable : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-       // if (health == 0)
-            StartCoroutine(waitTilDeath());
+       
 	}
 
     public virtual void OnTriggerEnter2D(Collider2D other)
@@ -26,7 +25,8 @@ public class Damageable : MonoBehaviour
         if (other.CompareTag("Arrow"))
         {
             health -= 1f;
-            StartCoroutine(waitTilDeath(secondsTilDeath, other.gameObject));
+            if(health <=0)
+                StartCoroutine(waitTilDeath(secondsTilDeath, other.gameObject));
 
         }
     }
