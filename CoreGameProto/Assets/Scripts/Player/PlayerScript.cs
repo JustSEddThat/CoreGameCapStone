@@ -14,14 +14,18 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private bool jumpable = false;
+
+	public AudioClip jumping;
+	public AudioClip step;
+	private AudioSource aud;
 	
 	void Start () 
     {
-//Updated upstream
+
         
 
         facingRight = true;
-// Stashed changes
+        aud = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 	}
@@ -42,17 +46,22 @@ public class PlayerScript : MonoBehaviour
     {
      
         Time.timeScale = 1;
-        if (isMoving())
-            anim.SetBool("Speed", true);
-        else
-            anim.SetBool("Speed", false);
+		if (isMoving())
+		{
+			anim.SetBool("Speed", true);
+		}
+		else
+			anim.SetBool("Speed", false);
+
+
 
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
+
         if (Input.GetKeyDown(KeyCode.Space) && jumpable)
             Jump();
         if (Input.GetKeyDown(KeyCode.Space) && !jumpable)
             if (GetComponent<Collider2D>().IsTouchingLayers(1 << 8))
-                canJump(true);
+                Jump();
 
 
         if (facingRight && Input.GetAxis("Horizontal") < 0)
@@ -72,7 +81,9 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetAxis("Horizontal") != 0)
         {
-            
+            aud.clip = step;
+            if(!aud.isPlaying && anim.GetBool("Speed") && anim.GetBool("Grounded") )
+			    aud.Play();
             return true;
         }
         return false;
@@ -80,7 +91,10 @@ public class PlayerScript : MonoBehaviour
 
     void isGrounded(bool isTrue)
     {
-       anim.SetBool("Grounded", true);
+		anim.SetBool("Grounded", isTrue);
+		if(isTrue)
+			anim.SetBool("Jumping", false);
+
     }
     void TextStateUpdate()
     {
@@ -98,9 +112,14 @@ public class PlayerScript : MonoBehaviour
 
     void Jump()
     {
+        anim.SetBool("Jumping", true);
         if (jumpPower == 500)
             rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(new Vector2(0, jumpPower));
+        rb.AddForce(new Vector2(0, jumpPower));	
+		aud.clip = jumping;
+		aud.PlayOneShot(jumping, .5f);
+
+
     }
 
 

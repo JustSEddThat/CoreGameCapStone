@@ -44,7 +44,7 @@ public class Enemy : Damageable
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("Bounceable") || coll.gameObject.CompareTag("Wall"))
+        if (!coll.gameObject.CompareTag("Jumpable") && !coll.gameObject.CompareTag("Arrow"))
             facingRight = !facingRight;
     }
 

@@ -5,8 +5,10 @@ using UnityEngine;
 public class GameController : MonoBehaviour 
 {
     public static GameController gc;
-    public GameObject a1Trig, a1Gate, firstEnemy;
+    public GameObject a1Trig, a1Gate, a2Gate, firstEnemy;
     public GameStates state;
+    public GameObject player;
+    public Vector3 respawnPoint;
     [SerializeField]
     int level;
 
@@ -18,6 +20,8 @@ public class GameController : MonoBehaviour
 	void Start () 
     {
         level = 0;
+        player = GameObject.FindGameObjectWithTag("Player");
+        respawnPoint = player.transform.position;
         a1Trig.SetActive(false);
         firstEnemy.SetActive(false);
         gc = this;
@@ -36,7 +40,7 @@ public class GameController : MonoBehaviour
                 break;
 
             case 2:
-                
+                Destroy(a2Gate);
                 break;
 
         }
@@ -46,6 +50,11 @@ public class GameController : MonoBehaviour
     {
 		
 	}
+
+    public void respawn()
+    {
+        player.transform.position = respawnPoint;
+    }
 
     public void KillGate()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Key : MonoBehaviour 
 {
-
+    public int keyNum;
 	// Use this for initialization
 	void Start () 
     {
@@ -12,7 +12,8 @@ public class Key : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
 		
 	}
 
@@ -22,6 +23,18 @@ public class Key : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             UIController.uic.showKeyAlert();
+            if (keyNum == 1)
+            {
+                
+                UIController.uic.showFirstMessage();
+            }
+
+            if (keyNum == 2)
+            {
+                UIController.uic.showThirdMessage();
+            }
+
+
             Destroy(gameObject);
         }
     }

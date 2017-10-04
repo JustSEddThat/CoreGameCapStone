@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour 
 {
+    [SerializeField]
     protected float health;
     protected float secondsTilDeath;
    
