@@ -28,7 +28,8 @@ public class Enemy : Damageable
         if (health <= 0)
         {
             StartCoroutine(waitTilDeath());
-            Destroy(barrier);
+            if(barrier != null)
+                Destroy(barrier);
         }
 	}
 

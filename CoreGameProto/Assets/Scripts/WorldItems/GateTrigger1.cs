@@ -11,9 +11,10 @@ public class GateTrigger1 : MonoBehaviour
         {
             UIController.uic.showSecondMessage();
             GameController.gc.KillGate();
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+
     }
 
 }
