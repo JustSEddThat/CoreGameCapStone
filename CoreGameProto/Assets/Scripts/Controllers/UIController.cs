@@ -91,7 +91,8 @@ public class UIController : MonoBehaviour
 	public void showZeroMessage()
 	{
 		string[] Dialogue = new string[]
-			{"Damn you father. I'm going to put an end to your regime, and stop you once and for all.", "Let’s start with dismantling your weapons.", "Ugh, I hate to say it, but I guess I am going to have to find that key first."};
+			{"Damn you father. I'm going to put an end to your regime, and stop you once and for all.", "Let’s start with dismantling your weapons.", "Ugh, I hate to say it, but I guess I am going to have to find that key first.",
+			"If my memory is correct, dad said destroying the targets reveals the key location." };
 		GameController.gc.state = GameStates.TextState;
 		textPanel.SetActive(true);
 		StartCoroutine(waitForClick(Dialogue));
@@ -102,7 +103,7 @@ public class UIController : MonoBehaviour
     public void showFirstMessage()
     {
         string[] Dialogue = new string[]
-            { "Alright so I have this key. Are there more? Maybe I'll only need this one... Back to the gate." };
+            { "This should be it, lets see, back to the gate?" };
         GameController.gc.state = GameStates.TextState;
         textPanel.SetActive(true);
         StartCoroutine(waitForClick(Dialogue));
@@ -114,7 +115,7 @@ public class UIController : MonoBehaviour
     public void showSecondMessage()
     {
         string[] Dialogue = new string[]
-            { "Now where do I insert this...", "???", "suspicious. Lets go along with this." };
+            { "Now where do I insert this...", "???", "Strange there's nothing but a guard.", "How bout I reboot you and look some place else." };
         GameController.gc.state = GameStates.TextState;
         textPanel.SetActive(true);
         StartCoroutine(waitForClick(Dialogue));
