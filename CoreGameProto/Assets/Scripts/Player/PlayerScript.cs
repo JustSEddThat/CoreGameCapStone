@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     public bool facingRight = true;
     private Rigidbody2D rb;
     private Animator anim;
-    private bool jumpable = false;
+    private bool jumpable;
 
 	
 	public AudioClip step;
@@ -21,9 +21,7 @@ public class PlayerScript : MonoBehaviour
 	
 	void Start () 
     {
-
-        
-
+		jumpable = false;
         facingRight = true;
         aud = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +31,7 @@ public class PlayerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
+		
         
         if (GameController.gc.state == GameStates.PlayState)
             PlayerStateUpdate();
@@ -110,9 +109,17 @@ public class PlayerScript : MonoBehaviour
         jumpable = canI;
     }
 
+	//Should be called from sendmessage when overlapping a bounceable object
+	public void ChangeJump(float jPow)
+	{
+		jumpPower = jPow;
+	}
     void Jump()
     {
-        anim.SetBool("Jumping", true);
+		//if (anim.GetBool ("Jumping"))
+			//anim.CrossFade("Jumping", 1);
+		//else
+			anim.SetBool("Jumping", true);
         if (jumpPower == 500)
             rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, jumpPower));	
@@ -125,16 +132,11 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Bounceable"))
-        {
-            jumpPower = 500;
-
-        }
+      
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Bounceable"))
-            jumpPower = 300;
+        
     }
 }

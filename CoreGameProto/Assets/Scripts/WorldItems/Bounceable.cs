@@ -5,10 +5,14 @@ using UnityEngine;
 public class Bounceable : MonoBehaviour 
 {
     public GameObject highlighter;
+	private float normJump, bestJump;
 	// Use this for initialization
 	void Start () 
     {
         highlighter.SetActive(false);
+		normJump = 300f;
+		bestJump = 500f;
+
 	}
 	
 	// Update is called once per frame
@@ -17,27 +21,38 @@ public class Bounceable : MonoBehaviour
 		
 	}
 
+	void PullPlayer(GameObject player)
+	{
+		
+	}
+
 
     IEnumerator BounceOpportunity(GameObject bouncer)
     {
         highlighter.SetActive(true);
-        bouncer.transform.parent.SendMessage("canJump", true);
-        yield return new WaitForSeconds(1.3f);
+        bouncer.SendMessage("canJump", true);
+        yield return new WaitForSeconds(1.7f);
         highlighter.SetActive(false);
-        bouncer.transform.parent.SendMessage("canJump", false);
+        bouncer.SendMessage("canJump", false);
     }
 
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Feet"))
-            StartCoroutine(BounceOpportunity(other.gameObject));
+		if (other.CompareTag ("Player")) 
+		{
+			other.SendMessage ("ChangeJump", bestJump);
+			StartCoroutine(BounceOpportunity(other.gameObject));
+
+		}
+            
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Feet"))
+        if (other.CompareTag("Player"))
         {
+			other.SendMessage ("ChangeJump", normJump);
             StopCoroutine("BounceOpportunity");
             highlighter.SetActive(false);
         }
