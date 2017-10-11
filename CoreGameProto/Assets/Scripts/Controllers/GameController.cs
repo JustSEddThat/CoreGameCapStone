@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour 
 {
     public static GameController gc;
-    public GameObject a1Trig, a1Gate, a2Gate, firstEnemy;
+    public GameObject a1Trig, a1Gate, a2Gate, a3Gate, firstEnemy;
     public GameStates state;
     public GameObject player;
     public Vector3 respawnPoint;
@@ -43,6 +43,9 @@ public class GameController : MonoBehaviour
                 Destroy(a2Gate);
                 break;
 
+            case 3:
+                Destroy(a3Gate);
+                break;
         }
     }
 

@@ -15,7 +15,7 @@ public class PlayerScript : MonoBehaviour
     private Animator anim;
     private bool jumpable = false;
 
-	public AudioClip jumping;
+	
 	public AudioClip step;
 	private AudioSource aud;
 	
@@ -116,8 +116,8 @@ public class PlayerScript : MonoBehaviour
         if (jumpPower == 500)
             rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, jumpPower));	
-		aud.clip = jumping;
-		aud.PlayOneShot(jumping, .5f);
+		//aud.clip = jumping;
+		//aud.PlayOneShot(jumping, .5f);
 
 
     }

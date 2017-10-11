@@ -131,6 +131,40 @@ public class UIController : MonoBehaviour
         GameController.gc.levelChange();
     }
 
+    public void showForThirMessage()
+    {
+        string[] Dialogue = new string[]
+            {"This must be the secret entrance to my father's base of operations" };
+        GameController.gc.state = GameStates.TextState;
+        textPanel.SetActive(true);
+        StartCoroutine(waitForClick(Dialogue));
+       
+
+    }
+
+    public void showFourthMessage()
+    {
+        string[] Dialogue = new string[]
+            {"The third key.", "This was too easy, I have a bad feeling about this" };
+        GameController.gc.state = GameStates.TextState;
+        textPanel.SetActive(true);
+        StartCoroutine(waitForClick(Dialogue));
+        GameController.gc.levelChange();
+
+    }
+
+    public void showFatherMessage()
+    {
+        string[] Dialogue = new string[]
+            {"Father!" };
+        GameController.gc.state = GameStates.TextState;
+        textPanel.SetActive(true);
+        StartCoroutine(waitForClick(Dialogue));
+
+
+    }
+ 
+
     IEnumerator AlertWaitGone(float waitTime)
     {
         yield return new WaitForSecondsRealtime(waitTime);

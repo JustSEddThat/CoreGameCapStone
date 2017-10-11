@@ -7,7 +7,8 @@ public class uhh : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        UIController.uic.alert.text = "This section is not ready. Gomennasai.";
+        if(other.CompareTag("Player"))
+        UIController.uic.showForThirMessage();
     }
 	
 }

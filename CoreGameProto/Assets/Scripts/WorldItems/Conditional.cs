@@ -16,13 +16,16 @@ public class Conditional : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        foreach (GameObject g in collectOrDestroy)
-            if (g == null)
-                collectOrDestroy.Remove(g);
+        if(collectOrDestroy.Count > 0)
+            foreach (GameObject g in collectOrDestroy)
+                if (g == null)
+                    collectOrDestroy.Remove(g);
+        if (openOrUnlock == null)
+            Destroy(this);
+        else
         if (collectOrDestroy.Count == 0)
             openOrUnlock.SetActive(true);
 
-        if (openOrUnlock == null)
-            Destroy(this);
+          
 	}
 }

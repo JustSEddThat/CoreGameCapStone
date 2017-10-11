@@ -34,6 +34,11 @@ public class Key : MonoBehaviour
                 UIController.uic.showThirdMessage();
             }
 
+            if (keyNum == 3)
+            {
+                UIController.uic.showFourthMessage();
+            }
+
 
             Destroy(gameObject);
         }
