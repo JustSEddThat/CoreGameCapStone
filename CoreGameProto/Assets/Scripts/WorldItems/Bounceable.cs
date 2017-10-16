@@ -30,10 +30,10 @@ public class Bounceable : MonoBehaviour
     IEnumerator BounceOpportunity(GameObject bouncer)
     {
         highlighter.SetActive(true);
-        bouncer.SendMessage("canJump", true);
+       // bouncer.SendMessage("canJump", true);
         yield return new WaitForSeconds(1.7f);
         highlighter.SetActive(false);
-        bouncer.SendMessage("canJump", false);
+      //  bouncer.SendMessage("canJump", false);
     }
 
 
@@ -41,7 +41,7 @@ public class Bounceable : MonoBehaviour
     {
 		if (other.CompareTag ("Player")) 
 		{
-			other.SendMessage ("ChangeJump", bestJump);
+			//other.SendMessage ("ChangeJump", bestJump);
 			StartCoroutine(BounceOpportunity(other.gameObject));
 
 		}
@@ -52,7 +52,7 @@ public class Bounceable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-			other.SendMessage ("ChangeJump", normJump);
+			//other.SendMessage ("ChangeJump", normJump);
             StopCoroutine("BounceOpportunity");
             highlighter.SetActive(false);
         }
