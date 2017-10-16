@@ -8,20 +8,31 @@ public class PlayerScript : MonoBehaviour
     private float jumpPower = 300f;
     [SerializeField]
     private float speed = 9f;
+    private Feet feet;
 
-
+    //track states
     public bool facingRight = true;
+    public bool isRunning;
+
+
+
+    private int lives;
     private Rigidbody2D rb;
     private Animator anim;
-    private bool jumpable;
+
 
 	
 	public AudioClip step;
 	private AudioSource aud;
 	
+
+
+
 	void Start () 
     {
-		jumpable = false;
+        feet = transform.GetComponentInChildren<Feet>();
+        isRunning = false;
+        lives = 3;
         facingRight = true;
         aud = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
@@ -43,58 +54,26 @@ public class PlayerScript : MonoBehaviour
 
     void PlayerStateUpdate()
     {
-     
+
+      
         Time.timeScale = 1;
-		if (isMoving())
-		{
-			anim.SetBool("Speed", true);
-		}
-		else
-			anim.SetBool("Speed", false);
+        Run();
+ 
+        if (feet.isGrounded)
+        {
+            anim.SetBool("Jumping", false);
+            anim.SetBool("Grounded", true);
 
-
-
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
-
-        if (Input.GetKeyDown(KeyCode.Space) && jumpable)
-            Jump();
-        if (Input.GetKeyDown(KeyCode.Space) && !jumpable)
-            if (GetComponent<Collider2D>().IsTouchingLayers(1 << 8))
+            if (Input.GetKeyDown(KeyCode.Space))
                 Jump();
+        }
+        else
+            anim.SetBool("Grounded", false);
 
 
-        if (facingRight && Input.GetAxis("Horizontal") < 0)
-        {
-            facingRight = false;
-            transform.Rotate(new Vector3(0, 180, 0));
-        }
-        else if (!facingRight && Input.GetAxis("Horizontal") > 0)
-        {
-            facingRight = true;
-            transform.Rotate(new Vector3(0, 180, 0));
-        }
-            
+       
     }
 
-    bool isMoving()
-    {
-        if (Input.GetAxis("Horizontal") != 0)
-        {
-            aud.clip = step;
-            if(!aud.isPlaying && anim.GetBool("Speed") && anim.GetBool("Grounded") )
-			    aud.Play();
-            return true;
-        }
-        return false;
-    }
-
-    void isGrounded(bool isTrue)
-    {
-		anim.SetBool("Grounded", isTrue);
-		if(isTrue)
-			anim.SetBool("Jumping", false);
-
-    }
     void TextStateUpdate()
     {
         Time.timeScale = 0;
@@ -104,10 +83,43 @@ public class PlayerScript : MonoBehaviour
     {
     }
 
-    void canJump(bool canI)
+     //Handles movement even in the air, but would have isRunning set to false in that case
+    void Run()
     {
-        jumpable = canI;
+        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
+
+        //While grounded check if moving/anims
+        if (feet.isGrounded) 
+            if (rb.velocity.x == 0)
+            {
+                isRunning = false;
+                anim.SetBool("Speed", false);
+            }
+            else
+            {
+                isRunning = true;
+                anim.SetBool("Speed", true);
+            }   
+
+        //Checks direction
+        if (facingRight && Input.GetAxis("Horizontal") < 0)
+        {
+            facingRight = false;
+            transform.Rotate(new Vector3(0, 180, 0));
+        }
+        else if (!facingRight && Input.GetAxis("Horizontal") > 0)
+        {
+            facingRight = true;
+            transform.Rotate(new Vector3(0, 180, 0));
+        }         
     }
+        
+
+
+
+
+   
+
 
 	//Should be called from sendmessage when overlapping a bounceable object
 	public void ChangeJump(float jPow)
@@ -116,10 +128,9 @@ public class PlayerScript : MonoBehaviour
 	}
     void Jump()
     {
-		//if (anim.GetBool ("Jumping"))
-			//anim.CrossFade("Jumping", 1);
-		//else
-			anim.SetBool("Jumping", true);
+		
+		anim.SetBool("Jumping", true);
+        anim.SetBool("Grounded", false);
         if (jumpPower == 500)
             rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, jumpPower));	
