@@ -18,19 +18,25 @@ public class Feet : MonoBehaviour
     {
        /* if (!cd.IsTouchingLayers(LayerMask.GetMask(new string[]{"Floors", "Springs"})))
             transform.parent.SendMessage("canJump", false);
-       */ 
+       
         if (cd.IsTouchingLayers(1 << 8))
             isGrounded = true;
         else
-            isGrounded = false;
+            isGrounded = false;*/
             
 	}
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //if(other.CompareTag("Jumpable") || other.CompareTag("Bounceable"))
-          //  transform.parent.SendMessage("canJump", true);
+		if (other.gameObject.layer == 8)
+			isGrounded = true;
     }
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.gameObject.layer == 8)
+			isGrounded = false;
+	}
 
 
 

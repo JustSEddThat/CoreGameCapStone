@@ -14,7 +14,7 @@ public class Arrow : MonoBehaviour {
 	void Start () 
     {
         rb = GetComponent<Rigidbody2D>();
-        rightFace = transform.parent.GetComponent<PlayerScript>().facingRight;
+        rightFace = transform.parent.parent.GetComponent<PlayerScript>().facingRight;
         if (!rightFace)
             transform.Rotate(new Vector3(0, 180, 0));
         initial = transform.position;
@@ -30,7 +30,7 @@ public class Arrow : MonoBehaviour {
 
     IEnumerator Fired()
     {
-        
+		transform.parent = null;
         while (alive) 
         {
             if (rightFace)

@@ -9,14 +9,14 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float speed = 9f;
     private Feet feet;
+	private bool canLeap;
+	private bool vulnerable;
 
     //track states
     public bool facingRight = true;
     public bool isRunning;
 
-
-
-    private int lives;
+    public int lives;
     private Rigidbody2D rb;
     private Animator anim;
 
@@ -30,6 +30,7 @@ public class PlayerScript : MonoBehaviour
 
 	void Start () 
     {
+		vulnerable = true;
         feet = transform.GetComponentInChildren<Feet>();
         isRunning = false;
         lives = 3;
@@ -64,13 +65,22 @@ public class PlayerScript : MonoBehaviour
             anim.SetBool("Jumping", false);
             anim.SetBool("Grounded", true);
 
-            if (Input.GetKeyDown(KeyCode.Space))
-                Jump();
+			if (Input.GetKeyDown (KeyCode.Space)) 
+			{
+				Jump ();
+				anim.SetBool("Jumping", true);
+				anim.SetBool("Grounded", false);
+			}
         }
         else
             anim.SetBool("Grounded", false);
 
-
+		if (canLeap && Input.GetKeyDown(KeyCode.Space)) 
+		{
+			Debug.Log ("Will DO LEap");
+			Leap ();
+			anim.SetBool ("Leap", false);
+		}
        
     }
 
@@ -129,25 +139,47 @@ public class PlayerScript : MonoBehaviour
     void Jump()
     {
 		
-		anim.SetBool("Jumping", true);
-        anim.SetBool("Grounded", false);
-        if (jumpPower == 500)
-            rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, jumpPower));	
 		//aud.clip = jumping;
 		//aud.PlayOneShot(jumping, .5f);
-
-
     }
 
+	void Leap()
+	{
+		rb.velocity = new Vector2 (rb.velocity.x, 0);
+		anim.SetBool ("Leap", true);
+		rb.AddForce (new Vector2 (0, jumpPower));
+	}
+
+	public void Damage(int dealt)
+	{
+		lives -= dealt;
+		StartCoroutine (DamageCoolDown ());
+	}
+
+	IEnumerator DamageCoolDown()
+	{
+		vulnerable = false;
+		yield return new WaitForSeconds (.5f);
+		vulnerable = true;
+
+	}
 
     void OnTriggerEnter2D(Collider2D other)
     {
-      
+		if (other.CompareTag ("Bounceable")) 
+		{
+			canLeap = true;
+			jumpPower = 500;
+		}
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        
+		if (other.CompareTag ("Bounceable")) 
+		{
+			canLeap = false;
+			jumpPower = 300;
+		}
     }
 }

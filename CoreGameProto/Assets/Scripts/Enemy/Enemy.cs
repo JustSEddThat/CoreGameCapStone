@@ -53,6 +53,9 @@ public class Enemy : Damageable
        
         if (other.CompareTag("Arrow"))
           health--;
+
+		if (other.CompareTag ("Player"))
+			other.SendMessage ("Damage", 1);
     }
 
 }
