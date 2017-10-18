@@ -5,13 +5,12 @@ using UnityEngine;
 public class Bounceable : MonoBehaviour 
 {
     public GameObject highlighter;
-	private float normJump, bestJump;
+
 	// Use this for initialization
 	void Start () 
     {
         highlighter.SetActive(false);
-		normJump = 300f;
-		bestJump = 500f;
+
 
 	}
 	
@@ -23,7 +22,7 @@ public class Bounceable : MonoBehaviour
 
 	void PullPlayer(GameObject player)
 	{
-		
+		player.GetComponent<Rigidbody2D> ().velocity /= 2;
 	}
 
 
@@ -36,17 +35,20 @@ public class Bounceable : MonoBehaviour
       //  bouncer.SendMessage("canJump", false);
     }
 
-
+	//public void 
     void OnTriggerEnter2D(Collider2D other)
     {
 		if (other.CompareTag ("Player")) 
 		{
+		//	PullPlayer (other.gameObject);
 			//other.SendMessage ("ChangeJump", bestJump);
 			StartCoroutine(BounceOpportunity(other.gameObject));
 
 		}
             
     }
+
+
 
     void OnTriggerExit2D(Collider2D other)
     {

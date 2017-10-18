@@ -70,6 +70,7 @@ public class PlayerScript : MonoBehaviour
 		case playerStates.inAir:
 			anim.SetBool ("Grounded", false);
 			anim.SetBool ("Speed", false);
+			anim.SetBool ("Jumping", true);
 			if (feet.isGrounded)
 				playState = playerStates.grounded;
 			break;
@@ -155,6 +156,7 @@ public class PlayerScript : MonoBehaviour
 
     void Jump()
     {
+		//rb.velocity = new Vector2 (rb.velocity.x, 0);
 		anim.SetBool ("Jumping", true);
         rb.AddForce(new Vector2(0, jumpPower));	
 		//aud.clip = jumping;
@@ -163,6 +165,7 @@ public class PlayerScript : MonoBehaviour
 
 	void Leap()
 	{
+		
 		rb.velocity = new Vector2 (rb.velocity.x, 0);
 		anim.SetBool ("Leap", true);
 		rb.AddForce (new Vector2 (0, jumpPower));
@@ -187,6 +190,7 @@ public class PlayerScript : MonoBehaviour
     {
 		if (other.CompareTag ("Bounceable")) 
 		{
+			
 			canLeap = true;
 			jumpPower = 500;
 		}
