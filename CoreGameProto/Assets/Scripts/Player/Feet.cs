@@ -34,8 +34,11 @@ public class Feet : MonoBehaviour
 
 	void OnTriggerExit2D(Collider2D other)
 	{
-		if (other.gameObject.layer == 8)
+		if (other.gameObject.layer == 8) 
+		{
 			isGrounded = false;
+			Debug.Log ("should not be grounded");
+		}
 	}
 
 

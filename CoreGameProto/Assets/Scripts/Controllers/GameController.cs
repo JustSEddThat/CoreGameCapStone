@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     public GameObject a1Trig, a1Gate, a2Gate, a3Gate, firstEnemy;
     public GameStates state;
     public GameObject player;
-    public Vector3 respawnPoint;
+	public Vector3 respawnPoint;
     [SerializeField]
     int level;
 
@@ -57,6 +57,8 @@ public class GameController : MonoBehaviour
     public void respawn()
     {
         player.transform.position = respawnPoint;
+		player.GetComponent<PlayerScript> ().lives = 3;
+		HealthController.hc.ShowHealth (3);
     }
 
     public void KillGate()

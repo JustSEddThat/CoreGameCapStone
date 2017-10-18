@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum playerStates{grounded, inAir, jumping}
+
 public class PlayerScript : MonoBehaviour 
 {
+
+	private playerStates playState;
     [SerializeField]
     private float jumpPower = 300f;
     [SerializeField]
@@ -24,12 +28,10 @@ public class PlayerScript : MonoBehaviour
 	
 	public AudioClip step;
 	private AudioSource aud;
-	
-
-
 
 	void Start () 
     {
+		playState = playerStates.inAir;
 		vulnerable = true;
         feet = transform.GetComponentInChildren<Feet>();
         isRunning = false;
@@ -56,24 +58,49 @@ public class PlayerScript : MonoBehaviour
     void PlayerStateUpdate()
     {
 
-      
-        Time.timeScale = 1;
+		switch (playState) 
+		{
+		case playerStates.grounded:
+			anim.SetBool ("Grounded", true);
+			anim.SetBool ("Jumping", false);
+			if (!feet.isGrounded)
+				playState = playerStates.inAir;
+			break;
+
+		case playerStates.inAir:
+			anim.SetBool ("Grounded", false);
+			anim.SetBool ("Speed", false);
+			if (feet.isGrounded)
+				playState = playerStates.grounded;
+			break;
+
+			case playerStates.jumping:
+			anim.SetBool ("Jumping", true);
+			anim.SetBool ("Grounded", false);
+			anim.SetBool ("Speed", false);
+			break;
+			
+
+
+		}
+
+
+		Time.timeScale = 1;
+		if (lives <= 0)
+			GameController.gc.respawn ();
+
         Run();
  
-        if (feet.isGrounded)
-        {
-            anim.SetBool("Jumping", false);
-            anim.SetBool("Grounded", true);
+		if (feet.isGrounded) 
+		{
+			Debug.Log ("Grounded: " + feet.isGrounded + "  Jumping: " + anim.GetBool ("Jumping"));
 
 			if (Input.GetKeyDown (KeyCode.Space)) 
-			{
 				Jump ();
-				anim.SetBool("Jumping", true);
-				anim.SetBool("Grounded", false);
-			}
-        }
-        else
-            anim.SetBool("Grounded", false);
+			
+		}
+
+			
 
 		if (canLeap && Input.GetKeyDown(KeyCode.Space)) 
 		{
@@ -81,7 +108,7 @@ public class PlayerScript : MonoBehaviour
 			Leap ();
 			anim.SetBool ("Leap", false);
 		}
-       
+        
     }
 
     void TextStateUpdate()
@@ -126,19 +153,9 @@ public class PlayerScript : MonoBehaviour
         
 
 
-
-
-   
-
-
-	//Should be called from sendmessage when overlapping a bounceable object
-	public void ChangeJump(float jPow)
-	{
-		jumpPower = jPow;
-	}
     void Jump()
     {
-		
+		anim.SetBool ("Jumping", true);
         rb.AddForce(new Vector2(0, jumpPower));	
 		//aud.clip = jumping;
 		//aud.PlayOneShot(jumping, .5f);
@@ -154,6 +171,7 @@ public class PlayerScript : MonoBehaviour
 	public void Damage(int dealt)
 	{
 		lives -= dealt;
+		HealthController.hc.ShowHealth (lives);
 		StartCoroutine (DamageCoolDown ());
 	}
 
@@ -183,3 +201,4 @@ public class PlayerScript : MonoBehaviour
 		}
     }
 }
+
