@@ -6,7 +6,7 @@ public enum playerStates{grounded, inAir, jumping}
 
 public class PlayerScript : MonoBehaviour 
 {
-
+	#region variables
 	private playerStates playState;
     [SerializeField]
     private float jumpPower = 300f;
@@ -16,9 +16,14 @@ public class PlayerScript : MonoBehaviour
 	private bool canLeap;
 	private bool vulnerable;
 
+
+
+
+
     //track states
     public bool facingRight = true;
     public bool isRunning;
+	public bool isPulled;
 
     public int lives;
     private Rigidbody2D rb;
@@ -28,9 +33,11 @@ public class PlayerScript : MonoBehaviour
 	
 	public AudioClip step;
 	private AudioSource aud;
+	#endregion variables
 
 	void Start () 
     {
+		isPulled = false;
 		playState = playerStates.inAir;
 		vulnerable = true;
         feet = transform.GetComponentInChildren<Feet>();
@@ -184,6 +191,13 @@ public class PlayerScript : MonoBehaviour
 		yield return new WaitForSeconds (.5f);
 		vulnerable = true;
 
+	}
+
+
+	public void StartPull()
+	{
+
+		isPulled = true;
 	}
 
     void OnTriggerEnter2D(Collider2D other)
