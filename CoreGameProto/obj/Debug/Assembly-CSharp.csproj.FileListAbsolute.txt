@@ -94,8 +94,6 @@ C:\Users\TEMP\Documents\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\UnityEngin
 C:\Users\TEMP\Documents\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\TEMP\Documents\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.dll
 C:\Users\TEMP\Documents\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.pdb
-C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
-C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.dll
 C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\Assembly-CSharp.dll
 C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\Assembly-CSharp.pdb
 C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\nunit.framework.dll
@@ -125,4 +123,6 @@ C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\nu
 C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\UnityEngine.Timeline.xml
 C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\UnityEngine.Analytics.xml
 C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\Temp\bin\Debug\UnityEngine.HoloLens.xml
+C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.dll
 C:\Users\jeton\Documents\GitHub\CoreGameCapStone\CoreGameProto\obj\Debug\Assembly-CSharp.pdb

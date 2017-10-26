@@ -7,11 +7,13 @@ public class HealthController : MonoBehaviour
 {
 	public Sprite health, health2, health3;
 	private Sprite curHealth;
+	private Animator anim;
 	public static HealthController hc;
 
 	void Start () 
 	{
 		hc = this;
+		anim = transform.parent.GetComponent<Animator> ();
 	}
 	
 
@@ -22,7 +24,7 @@ public class HealthController : MonoBehaviour
 
 	public void ShowHealth(int number)
 	{
-		if (number == 3)
+		if (number == 3) 
 			curHealth = health;
 		if (number == 2)
 			curHealth = health2;
@@ -30,5 +32,6 @@ public class HealthController : MonoBehaviour
 			curHealth = health3;
 
 		GetComponent<Image> ().sprite = curHealth;
+		anim.SetTrigger ("Hurt");
 	}
 }

@@ -105,7 +105,7 @@ public class PlayerScript : MonoBehaviour
  
 		if (feet.isGrounded) 
 		{
-			Debug.Log ("Grounded: " + feet.isGrounded + "  Jumping: " + anim.GetBool ("Jumping"));
+			
 
 			if (Input.GetKeyDown (KeyCode.Space)) 
 				Jump ();
@@ -114,7 +114,7 @@ public class PlayerScript : MonoBehaviour
 		else
 		if (canLeap && Input.GetKeyDown(KeyCode.Space)) 
 		{
-			Debug.Log ("Will DO LEap");
+
 			Leap ();
 			
 		}
