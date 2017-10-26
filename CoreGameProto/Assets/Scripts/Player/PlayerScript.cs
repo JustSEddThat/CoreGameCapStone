@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum playerStates{grounded, inAir, jumping}
+public enum playerStates{grounded, inAir, jumping, leaping}
 
 public class PlayerScript : MonoBehaviour 
 {
@@ -69,27 +69,31 @@ public class PlayerScript : MonoBehaviour
 		{
 		case playerStates.grounded:
 			anim.SetBool ("Grounded", true);
-			anim.SetBool ("Jumping", false);
+			//anim.SetBool ("Jumping", false);
 			if (!feet.isGrounded)
 				playState = playerStates.inAir;
 			break;
 
 		case playerStates.inAir:
 			anim.SetBool ("Grounded", false);
-			anim.SetBool ("Speed", false);
-			anim.SetBool ("Jumping", true);
+			anim.SetBool ("Moving", false);
+
 			if (feet.isGrounded)
 				playState = playerStates.grounded;
 			break;
 
 			case playerStates.jumping:
-			anim.SetBool ("Jumping", true);
+			anim.SetTrigger ("Jump");
 			anim.SetBool ("Grounded", false);
 			anim.SetBool ("Speed", false);
 			break;
-			
 
-
+		case playerStates.leaping:
+			anim.SetTrigger ("Leap");
+			//anim.SetBool ("Jumping", false);
+			if (feet.isGrounded)
+				playState = playerStates.grounded;
+			break;
 		}
 
 
@@ -107,14 +111,12 @@ public class PlayerScript : MonoBehaviour
 				Jump ();
 			
 		}
-
-			
-
+		else
 		if (canLeap && Input.GetKeyDown(KeyCode.Space)) 
 		{
 			Debug.Log ("Will DO LEap");
 			Leap ();
-			anim.SetBool ("Leap", false);
+			
 		}
         
     }
@@ -126,6 +128,7 @@ public class PlayerScript : MonoBehaviour
 
     void PauseUpdate()
     {
+		
     }
 
      //Handles movement even in the air, but would have isRunning set to false in that case
@@ -138,12 +141,12 @@ public class PlayerScript : MonoBehaviour
             if (rb.velocity.x == 0)
             {
                 isRunning = false;
-                anim.SetBool("Speed", false);
+                anim.SetBool("Moving", false);
             }
             else
             {
                 isRunning = true;
-                anim.SetBool("Speed", true);
+                anim.SetBool("Moving", true);
             }   
 
         //Checks direction
@@ -164,7 +167,7 @@ public class PlayerScript : MonoBehaviour
     void Jump()
     {
 		//rb.velocity = new Vector2 (rb.velocity.x, 0);
-		anim.SetBool ("Jumping", true);
+		anim.SetTrigger ("Jump");
         rb.AddForce(new Vector2(0, jumpPower));	
 		//aud.clip = jumping;
 		//aud.PlayOneShot(jumping, .5f);
@@ -172,10 +175,10 @@ public class PlayerScript : MonoBehaviour
 
 	void Leap()
 	{
-		
 		rb.velocity = new Vector2 (rb.velocity.x, 0);
-		anim.SetBool ("Leap", true);
-		rb.AddForce (new Vector2 (0, jumpPower));
+		//anim.SetBool ("Jumpin", false);
+		anim.SetTrigger ("Leap");
+		rb.AddForce (new Vector2 (0, 500));
 	}
 
 	public void Damage(int dealt)
@@ -206,7 +209,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			
 			canLeap = true;
-			jumpPower = 500;
+			//jumpPower = 500;
 		}
     }
 
@@ -215,7 +218,7 @@ public class PlayerScript : MonoBehaviour
 		if (other.CompareTag ("Bounceable")) 
 		{
 			canLeap = false;
-			jumpPower = 300;
+			//jumpPower = 300;
 		}
     }
 }
