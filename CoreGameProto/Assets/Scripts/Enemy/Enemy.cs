@@ -8,7 +8,9 @@ public class Enemy : Damageable
     Rigidbody2D rb;
     bool facingRight;
     public GameObject barrier;
-    public bool isMover;
+    public bool isMover, damaged;
+	private Sprite myImage;
+	private SpriteRenderer sr;
 
 	void Start ()
     {
@@ -17,12 +19,15 @@ public class Enemy : Damageable
         facingRight = true;
         health = 3;
         secondsTilDeath = 2.5f;
+		damaged = false;
+		myImage = GetComponent<SpriteRenderer> ().sprite;
+		sr = GetComponent<SpriteRenderer> ();
 	}
 	
 	
 	void Update () 
     {
-        if (GameController.gc.state == GameStates.PlayState && isMover)
+		if (GameController.gc.state == GameStates.PlayState && isMover && !damaged)
             Movement();
         
         if (health <= 0)
@@ -48,11 +53,25 @@ public class Enemy : Damageable
             facingRight = !facingRight;
     }
 
+	IEnumerator appearDamaged()
+	{
+		damaged = true;
+		rb.velocity = new Vector2(0,0);
+		yield return new WaitForSeconds (4f);
+		damaged = false;
+
+			
+	}
+
     public override void OnTriggerEnter2D(Collider2D other)
     {
        
-        if (other.CompareTag("Arrow"))
-          health--;
+		if (other.CompareTag ("Arrow")) 
+		{
+			
+			health--;
+		}
+		
 
 		if (other.CompareTag ("Player"))
 			other.SendMessage ("Damage", 1);

@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
         firstEnemy.SetActive(false);
         gc = this;
         state = GameStates.PlayState;
+		Physics2D.IgnoreLayerCollision (10, 11);
 	}
 	
     public void levelChange()

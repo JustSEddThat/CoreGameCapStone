@@ -10,8 +10,6 @@ public class Bounceable : MonoBehaviour
 	void Start () 
     {
         highlighter.SetActive(false);
-
-
 	}
 	
 	// Update is called once per frame
