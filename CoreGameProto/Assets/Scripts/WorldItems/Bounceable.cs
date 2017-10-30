@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Bounceable : MonoBehaviour 
 {
-    public GameObject highlighter;
+    
+
 
 	// Use this for initialization
 	void Start () 
     {
-        highlighter.SetActive(false);
+      
+
 	}
 	
 	// Update is called once per frame
@@ -26,10 +28,10 @@ public class Bounceable : MonoBehaviour
 
     IEnumerator BounceOpportunity(GameObject bouncer)
     {
-        highlighter.SetActive(true);
+      
        // bouncer.SendMessage("canJump", true);
         yield return new WaitForSeconds(1.7f);
-        highlighter.SetActive(false);
+     
       //  bouncer.SendMessage("canJump", false);
     }
 
@@ -40,6 +42,8 @@ public class Bounceable : MonoBehaviour
 		{
 		//	PullPlayer (other.gameObject);
 			//other.SendMessage ("ChangeJump", bestJump);
+			Debug.Log("WeSeeYou");
+			transform.GetChild(0).SendMessage("TriggerAnim");
 			StartCoroutine(BounceOpportunity(other.gameObject));
 
 		}
@@ -53,8 +57,10 @@ public class Bounceable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 			//other.SendMessage ("ChangeJump", normJump);
+
+			transform.GetChild(0).SendMessage("ExitAnim");
             StopCoroutine("BounceOpportunity");
-            highlighter.SetActive(false);
+           
         }
     }
 }
