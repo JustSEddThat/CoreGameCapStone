@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour {
     {
         while (player != null)
         {
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y - .835f, -16);
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2.835f, -16);
             yield return null;
         }
     }
