@@ -168,7 +168,7 @@ public class PlayerScript : MonoBehaviour
     {
 		//rb.velocity = new Vector2 (rb.velocity.x, 0);
 		anim.SetTrigger ("Jump");
-        rb.AddForce(new Vector2(0, jumpPower));	
+        rb.AddForce(new Vector2(0, jumpPower)*1.5f);	
 		//aud.clip = jumping;
 		//aud.PlayOneShot(jumping, .5f);
     }
@@ -178,7 +178,7 @@ public class PlayerScript : MonoBehaviour
 		rb.velocity = new Vector2 (rb.velocity.x, 0);
 		//anim.SetBool ("Jumpin", false);
 		anim.SetTrigger ("Leap");
-		rb.AddForce (new Vector2 (0, 500));
+		rb.AddForce (new Vector2 (0, 500)*1.3f);
 	}
 
 	public void Damage(int dealt)
