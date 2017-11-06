@@ -7,7 +7,7 @@ public class Arrow : MonoBehaviour {
     Vector3 initial;
     Rigidbody2D rb;
     public float life = 7;
-    public bool alive = true;
+	public bool alive = true, held = true;
     public bool rightFace;
 
 	// Use this for initialization
@@ -18,8 +18,10 @@ public class Arrow : MonoBehaviour {
         if (!rightFace)
             transform.Rotate(new Vector3(0, 180, 0));
         initial = transform.position;
-        StartCoroutine(Fired());
-        StartCoroutine(live());
+
+		StartCoroutine(Held());
+        //StartCoroutine(Fired());
+        //StartCoroutine(live());
 	}
 	
 	// Update is called once per frame
@@ -28,9 +30,27 @@ public class Arrow : MonoBehaviour {
 		
 	}
 
+	public void Fire()
+	{
+		
+		held = false;
+		StartCoroutine(Fired());
+		StartCoroutine(live());
+	}
+
+	IEnumerator Held()
+	{
+		while (held) 
+		{
+			transform.position = new Vector2 (transform.parent.position.x, transform.parent.position.y);
+			yield return null;
+		}
+	}
     IEnumerator Fired()
     {
+		rightFace = transform.parent.parent.GetComponent<PlayerScript>().facingRight;
 		transform.parent = null;
+
         while (alive) 
         {
             if (rightFace)

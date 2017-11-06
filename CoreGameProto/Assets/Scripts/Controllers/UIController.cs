@@ -46,7 +46,7 @@ public class UIController : MonoBehaviour
         message.text = textList[index];
         index++;
 
-		while (!Input.GetKeyDown(KeyCode.Return))
+		while (!Input.GetButtonDown("Submit"))
             yield return null;
 
         if (index < textList.Length)
@@ -69,7 +69,7 @@ public class UIController : MonoBehaviour
     {
         
         yield return new WaitForEndOfFrame();
-		while (!Input.GetKeyDown(KeyCode.Return))
+		while (!Input.GetButtonDown("Submit"))
             yield return null;
 
         if (index < textList.Length)

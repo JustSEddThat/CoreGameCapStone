@@ -37,7 +37,7 @@ public class Feet : MonoBehaviour
 		if (other.gameObject.layer == 8) 
 		{
 			isGrounded = false;
-			Debug.Log ("should not be grounded");
+
 		}
 	}
 

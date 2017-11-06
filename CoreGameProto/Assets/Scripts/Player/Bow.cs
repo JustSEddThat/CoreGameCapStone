@@ -6,6 +6,7 @@ public class Bow : MonoBehaviour
 {
     public GameObject Shot;
     public bool ready = true;
+	private GameObject arrow;
 	// Use this for initialization
 	void Start () 
     {
@@ -15,12 +16,26 @@ public class Bow : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.GetKeyUp(KeyCode.F) && ready)
+		if (Input.GetButtonDown ("Fire1")) 
+		{
+			transform.parent.SendMessage ("HoldFire", true);
+			if(ready)
+				arrow = Instantiate (Shot, transform.position, Shot.transform.rotation, transform);  
+		}
+		else
+		if (Input.GetButtonUp("Fire1"))
         {
-            
-            Instantiate(Shot, transform.position, Shot.transform.rotation, transform);
-            ready = false;
-            StartCoroutine(shotCoolDown());
+			transform.parent.SendMessage ("HoldFire", false);
+			
+
+			if (ready && arrow!= null) 
+			{
+				transform.parent.SendMessage ("Firing");
+				arrow.SendMessage ("Fire");
+				//Instantiate (Shot, transform.position, Shot.transform.rotation, transform);
+				ready = false;
+				StartCoroutine (shotCoolDown ());
+			}
         }
                 
 	}

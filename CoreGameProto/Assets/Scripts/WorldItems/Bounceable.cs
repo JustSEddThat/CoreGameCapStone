@@ -42,7 +42,7 @@ public class Bounceable : MonoBehaviour
 		{
 		//	PullPlayer (other.gameObject);
 			//other.SendMessage ("ChangeJump", bestJump);
-			Debug.Log("WeSeeYou");
+
 			transform.GetChild(0).SendMessage("TriggerAnim");
 			StartCoroutine(BounceOpportunity(other.gameObject));
 

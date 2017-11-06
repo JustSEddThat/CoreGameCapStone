@@ -107,12 +107,12 @@ public class PlayerScript : MonoBehaviour
 		{
 			
 
-			if (Input.GetKeyDown (KeyCode.Space)) 
+			if (Input.GetButtonDown("Jump")) 
 				Jump ();
 			
 		}
 		else
-		if (canLeap && Input.GetKeyDown(KeyCode.Space)) 
+			if (canLeap && Input.GetButtonDown("Jump")) 
 		{
 
 			Leap ();
@@ -197,10 +197,15 @@ public class PlayerScript : MonoBehaviour
 	}
 
 
-	public void StartPull()
+	public void HoldFire(bool hold)
 	{
+		
+		anim.SetBool ("HoldFire", hold);
+	}
 
-		isPulled = true;
+	public void Firing()
+	{
+		anim.SetTrigger ("Firing");
 	}
 
     void OnTriggerEnter2D(Collider2D other)
