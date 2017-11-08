@@ -54,9 +54,9 @@ public class Arrow : MonoBehaviour {
         while (alive) 
         {
             if (rightFace)
-                rb.velocity = new Vector2(15f, 0);
+                rb.velocity = new Vector2(25f, 0);
             else
-                rb.velocity = new Vector2(-15f, 0);
+                rb.velocity = new Vector2(-25f, 0);
             
             yield return null;
         }
@@ -81,6 +81,7 @@ public class Arrow : MonoBehaviour {
         {
             StopCoroutine(Fired());
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+			Destroy(GetComponent<Collider2D> ());
            
         }
 

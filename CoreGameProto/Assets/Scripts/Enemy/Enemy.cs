@@ -7,6 +7,7 @@ public class Enemy : Damageable
 
     Rigidbody2D rb;
     bool facingRight;
+	private float width, height;
     public GameObject barrier;
     public bool isMover, damaged;
 	private Sprite myImage;
@@ -22,6 +23,10 @@ public class Enemy : Damageable
 		damaged = false;
 		myImage = GetComponent<SpriteRenderer> ().sprite;
 		sr = GetComponent<SpriteRenderer> ();
+		width = GetComponent<BoxCollider2D> ().size.x;
+		height = GetComponent<BoxCollider2D> ().size.y;
+
+
 	}
 	
 	
@@ -29,7 +34,9 @@ public class Enemy : Damageable
     {
 		if (GameController.gc.state == GameStates.PlayState && isMover && !damaged)
             Movement();
-        
+
+		EnemyHealth ();
+
         if (health <= 0)
         {
             if(barrier != null)
@@ -38,8 +45,15 @@ public class Enemy : Damageable
         }
 	}
 
+
+	void EnemyHealth()
+	{
+		
+		transform.GetChild (0).localScale = new Vector3 (2*(health / 3), .2f);
+	}
     void Movement()
     {
+		
         if (facingRight)
             rb.velocity = new Vector2(5f, 0);
         else
