@@ -16,34 +16,39 @@ public class Bow : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-		if (Input.GetButtonDown ("Fire1")) 
+		if (GameController.gc.state == GameStates.PlayState) 
 		{
-			transform.parent.SendMessage ("HoldFire", true);
-			if(ready)
-				arrow = Instantiate (Shot, transform.position, Shot.transform.rotation, transform);  
-		}
-		else
-		if (Input.GetButtonUp("Fire1"))
-        {
-			transform.parent.SendMessage ("HoldFire", false);
+			if (ready) 
+			{
+				if (Input.GetButtonDown ("Fire1")) 
+				{
+					transform.parent.SendMessage ("HoldFire", true);
+					if (ready)
+						arrow = Instantiate (Shot, transform.position, Shot.transform.rotation, transform);  
+				}
+				else if (Input.GetButtonUp ("Fire1")) 
+				{
+					transform.parent.SendMessage ("HoldFire", false);
 			
 
-			if (ready && arrow!= null) 
-			{
-				transform.parent.SendMessage ("Firing");
-				arrow.SendMessage ("Fire");
-				//Instantiate (Shot, transform.position, Shot.transform.rotation, transform);
-				ready = false;
-				StartCoroutine (shotCoolDown ());
+					if (ready && arrow != null) 
+					{
+						transform.parent.SendMessage ("Firing");
+						arrow.SendMessage ("Fire");
+						//Instantiate (Shot, transform.position, Shot.transform.rotation, transform);
+						ready = false;
+						StartCoroutine (shotCoolDown ());
+					}
+				}
 			}
-        }
+		}
                 
 	}
 
 
     IEnumerator shotCoolDown()
     {
-        yield return new WaitForSeconds(.7f);
+        yield return new WaitForSeconds(.5f);
         ready = true;
     }
 

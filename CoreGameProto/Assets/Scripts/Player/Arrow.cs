@@ -48,7 +48,8 @@ public class Arrow : MonoBehaviour {
 	}
     IEnumerator Fired()
     {
-		rightFace = transform.parent.parent.GetComponent<PlayerScript>().facingRight;
+		if(transform.parent != null)
+			rightFace = transform.parent.parent.GetComponent<PlayerScript>().facingRight;
 		transform.parent = null;
 
         while (alive) 
