@@ -37,6 +37,7 @@ public class Bow : MonoBehaviour
 						arrow.SendMessage ("Fire");
 						//Instantiate (Shot, transform.position, Shot.transform.rotation, transform);
 						ready = false;
+						GetComponent<AudioSource> ().Play ();
 						StartCoroutine (shotCoolDown ());
 					}
 				}

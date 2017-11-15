@@ -25,13 +25,14 @@ public class PlayerScript : MonoBehaviour
     public bool isRunning;
 	public bool isPulled;
 
+
     public int lives;
     private Rigidbody2D rb;
     private Animator anim;
 
 
 	
-	public AudioClip step;
+
 	private AudioSource aud;
 	#endregion variables
 
@@ -45,6 +46,7 @@ public class PlayerScript : MonoBehaviour
         lives = 3;
         facingRight = true;
         aud = GetComponent<AudioSource>();
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 	}
@@ -102,11 +104,10 @@ public class PlayerScript : MonoBehaviour
 			GameController.gc.respawn ();
 
         Run();
+		RunAudio ();
  
 		if (feet.isGrounded) 
 		{
-			
-
 			if (Input.GetButtonDown("Jump")) 
 				Jump ();
 			
@@ -131,6 +132,19 @@ public class PlayerScript : MonoBehaviour
 		
     }
 
+	void RunAudio()
+	{
+		if (anim.GetBool ("Grounded") && anim.GetBool ("Moving")) 
+		{
+			if (!aud.isPlaying)
+				aud.Play ();
+		} 
+		else 
+		{
+			if(aud.isPlaying)
+				aud.Stop ();
+		}
+	}
      //Handles movement even in the air, but would have isRunning set to false in that case
     void Run()
     {
@@ -140,6 +154,7 @@ public class PlayerScript : MonoBehaviour
         if (feet.isGrounded) 
             if (rb.velocity.x == 0)
             {
+				
                 isRunning = false;
                 anim.SetBool("Moving", false);
             }
