@@ -125,6 +125,7 @@ public class PlayerScript : MonoBehaviour
     void TextStateUpdate()
     {
         Time.timeScale = 0;
+		aud.Stop ();
     }
 
     void PauseUpdate()
@@ -148,7 +149,18 @@ public class PlayerScript : MonoBehaviour
      //Handles movement even in the air, but would have isRunning set to false in that case
     void Run()
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
+
+		float h, h2;
+		h = Input.GetAxis ("Horizontal");
+		h2 = Input.GetAxis ("Horizontal2");
+
+		if (h2 != 0)
+			rb.velocity = new Vector2 (h2 * speed, rb.velocity.y);
+		else if (h != 0)
+			rb.velocity = new Vector2 (h * speed, rb.velocity.y);
+		else
+			rb.velocity = new Vector2 (0, rb.velocity.y);
+
 
         //While grounded check if moving/anims
         if (feet.isGrounded) 
@@ -165,16 +177,20 @@ public class PlayerScript : MonoBehaviour
             }   
 
         //Checks direction
-        if (facingRight && Input.GetAxis("Horizontal") < 0)
+		if (facingRight && rb.velocity.x < 0)
         {
             facingRight = false;
             transform.Rotate(new Vector3(0, 180, 0));
+		
         }
-        else if (!facingRight && Input.GetAxis("Horizontal") > 0)
+		else if (!facingRight && rb.velocity.x > 0)
         {
             facingRight = true;
             transform.Rotate(new Vector3(0, 180, 0));
-        }         
+	
+        }  
+
+
     }
         
 

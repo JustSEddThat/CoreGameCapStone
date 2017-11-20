@@ -7,13 +7,14 @@ public class HealthController : MonoBehaviour
 {
 	public Sprite health, health2, health3;
 	private Sprite curHealth;
-	private Animator anim;
+	private Animator anim, camAnim;
 	public static HealthController hc;
 
 	void Start () 
 	{
 		hc = this;
 		anim = transform.parent.GetComponent<Animator> ();
+		camAnim = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Animator> ();
 	}
 	
 
@@ -33,5 +34,7 @@ public class HealthController : MonoBehaviour
 
 		GetComponent<Image> ().sprite = curHealth;
 		anim.SetTrigger ("Hurt");
+		camAnim.SetTrigger ("Wobble");
+			
 	}
 }
