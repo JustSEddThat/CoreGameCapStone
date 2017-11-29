@@ -21,7 +21,10 @@ public class UIController : MonoBehaviour
         message = textPanel.GetComponentInChildren<Text>();
         textPanel.SetActive(false);
 
-		showZeroMessage();
+		if (GameController.gc.tutorial)
+			alert.text = "Use the left analog (or left and right arrow keys) to move left and right. Use the A button (or Spacebar) to jump";
+		else
+			showZeroMessage();
 
 	}
 	

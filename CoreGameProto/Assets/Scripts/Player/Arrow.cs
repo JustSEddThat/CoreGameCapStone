@@ -20,8 +20,7 @@ public class Arrow : MonoBehaviour {
         initial = transform.position;
 
 		StartCoroutine(Held());
-        //StartCoroutine(Fired());
-        //StartCoroutine(live());
+   
 	}
 	
 	// Update is called once per frame
@@ -46,6 +45,8 @@ public class Arrow : MonoBehaviour {
 			yield return null;
 		}
 	}
+
+
     IEnumerator Fired()
     {
 		if(transform.parent != null)

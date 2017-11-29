@@ -8,13 +8,14 @@ public class GameController : MonoBehaviour
     public GameObject a1Trig, a1Gate, a2Gate, a3Gate, firstEnemy;
     public GameStates state;
     public GameObject player;
+	public bool tutorial;
 	public Vector3 respawnPoint;
     [SerializeField]
     int level;
 
-    void OnAwake()
+    void Awake()
     {
-       
+		gc = this;
     }
 
 	void Start () 
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour
         respawnPoint = player.transform.position;
         a1Trig.SetActive(false);
         firstEnemy.SetActive(false);
-        gc = this;
+       
         state = GameStates.PlayState;
 		Physics2D.IgnoreLayerCollision (10, 11);
 	}

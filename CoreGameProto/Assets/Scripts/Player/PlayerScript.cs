@@ -55,7 +55,7 @@ public class PlayerScript : MonoBehaviour
 	void Update () 
     {
 		
-        
+
         if (GameController.gc.state == GameStates.PlayState)
             PlayerStateUpdate();
         if (GameController.gc.state == GameStates.TextState)
