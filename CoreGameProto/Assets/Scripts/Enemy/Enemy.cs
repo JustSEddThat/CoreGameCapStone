@@ -54,10 +54,16 @@ public class Enemy : Damageable
     void Movement()
     {
 		
-        if (facingRight)
-            rb.velocity = new Vector2(5f, 0);
-        else
-            rb.velocity = new Vector2(-5f, 0);
+		if (facingRight) 
+		{
+			rb.velocity = new Vector2 (5f, 0);
+			transform.localRotation = Quaternion.Euler (new Vector3 (0, 0, 0));
+		}
+		else 
+		{
+			rb.velocity = new Vector2 (-5f, 0);
+			transform.localRotation= Quaternion.Euler(new Vector3(0, 180, 0));
+		}
     }
 
 
