@@ -18,11 +18,16 @@ public class ButtonController : MonoBehaviour
 
 	public void OnControl()
 	{
-		
+		SceneManager.LoadScene ("Controls");
 	}
 
 	public void OnPreface()
 	{
 		
+	}
+
+	public void OnTitle()
+	{
+		SceneManager.LoadScene ("Title Screen");
 	}
 }

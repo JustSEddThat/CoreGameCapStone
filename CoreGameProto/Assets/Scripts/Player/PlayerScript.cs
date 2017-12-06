@@ -38,6 +38,7 @@ public class PlayerScript : MonoBehaviour
 
 	void Start () 
     {
+		Physics2D.IgnoreLayerCollision (11, 12);
 		isPulled = false;
 		playState = playerStates.inAir;
 		vulnerable = true;

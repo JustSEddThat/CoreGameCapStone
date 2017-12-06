@@ -56,9 +56,9 @@ public class Arrow : MonoBehaviour {
         while (alive) 
         {
             if (rightFace)
-                rb.velocity = new Vector2(25f, 0);
+                rb.velocity = new Vector2(30f, 0);
             else
-                rb.velocity = new Vector2(-25f, 0);
+                rb.velocity = new Vector2(-30f, 0);
             
             yield return null;
         }

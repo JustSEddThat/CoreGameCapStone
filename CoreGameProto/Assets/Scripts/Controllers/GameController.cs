@@ -23,8 +23,10 @@ public class GameController : MonoBehaviour
         level = 0;
         player = GameObject.FindGameObjectWithTag("Player");
         respawnPoint = player.transform.position;
-        a1Trig.SetActive(false);
-        firstEnemy.SetActive(false);
+		if(a1Trig != null)
+			a1Trig.SetActive(false);
+		if(a1Trig != null)
+        	firstEnemy.SetActive(false);
        
         state = GameStates.PlayState;
 		Physics2D.IgnoreLayerCollision (10, 11);

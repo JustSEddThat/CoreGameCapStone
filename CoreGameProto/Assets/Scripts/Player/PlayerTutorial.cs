@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum playerStates{grounded, inAir, jumping, leaping}
+public enum playerStatesTutorial{grounded, inAir, jumping, leaping}
 
 public class PlayerTutorial : MonoBehaviour 
 {
-	private playerStates playState;
+	private playerStatesTutorial playState;
 	[SerializeField]
 	private float jumpPower = 300f;
 	[SerializeField]
@@ -32,8 +32,9 @@ public class PlayerTutorial : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		
 		isPulled = false;
-		playState = playerStates.inAir;
+		playState = playerStatesTutorial.inAir;
 		feet = transform.GetComponentInChildren<Feet>();
 		isRunning = false;
 		lives = 3;
@@ -54,32 +55,32 @@ public class PlayerTutorial : MonoBehaviour
 	{
 
 		switch (playState) {
-		case playerStates.grounded:
+		case playerStatesTutorial.grounded:
 			anim.SetBool ("Grounded", true);
 			//anim.SetBool ("Jumping", false);
 			if (!feet.isGrounded)
-				playState = playerStates.inAir;
+				playState = playerStatesTutorial.inAir;
 			break;
 
-		case playerStates.inAir:
+		case playerStatesTutorial.inAir:
 			anim.SetBool ("Grounded", false);
 			anim.SetBool ("Moving", false);
 
 			if (feet.isGrounded)
-				playState = playerStates.grounded;
+				playState = playerStatesTutorial.grounded;
 			break;
 
-		case playerStates.jumping:
+		case playerStatesTutorial.jumping:
 			anim.SetTrigger ("Jump");
 			anim.SetBool ("Grounded", false);
 			anim.SetBool ("Speed", false);
 			break;
 
-		case playerStates.leaping:
+		case playerStatesTutorial.leaping:
 			anim.SetTrigger ("Leap");
 			//anim.SetBool ("Jumping", false);
 			if (feet.isGrounded)
-				playState = playerStates.grounded;
+				playState = playerStatesTutorial.grounded;
 			break;
 		}
 
