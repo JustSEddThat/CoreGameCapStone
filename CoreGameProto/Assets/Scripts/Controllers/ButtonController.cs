@@ -23,7 +23,7 @@ public class ButtonController : MonoBehaviour
 
 	public void OnPreface()
 	{
-		
+		SceneManager.LoadScene ("Preface");
 	}
 
 	public void OnTitle()
